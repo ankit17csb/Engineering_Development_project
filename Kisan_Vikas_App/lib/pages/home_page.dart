@@ -4,6 +4,8 @@ import 'package:thegorgeousotp/stores/login_store.dart';
 import 'package:thegorgeousotp/theme.dart';
 import 'package:thegorgeousotp/widgets/sidebar.dart';
 import 'package:thegorgeousotp/services/vidoes/videos.dart';
+import 'package:thegorgeousotp/services/products/products.dart';
+import 'package:thegorgeousotp/services/weather/weather.dart';
 
 List<String> serviceImage = [
   'assets/img/buy.jpeg',
@@ -23,6 +25,15 @@ List<String> serviceLabel = [
   'Setting'
 ];
 
+List<String> serviceLocation = [
+  'Videos()',
+  'Videos()',
+  'Videos()',
+  'Videos()',
+  'Videos()',
+  'Videos()',
+];
+
 class HomePage extends StatefulWidget {
   const HomePage({Key key}) : super(key: key);
   @override
@@ -30,12 +41,44 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+ 
+ 
   Widget cardsWidget(itemIndex) => Container(
         margin: const EdgeInsets.all(30),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(25.0)),
           color: Colors.white,
-        ),
+        ), 
+        child : GestureDetector(
+                           
+                            onTap: (){
+                              if(itemIndex == 0){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => 
+                                Products())
+                                ,
+                              );
+                              }
+                              else if(itemIndex == 1){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => 
+                                Weather())
+                                ,
+                              );
+                              }
+                              else if(itemIndex == 2){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => 
+                                Videos())
+                                ,
+                              );
+                              }
+                              
+                            },
+                           
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -57,9 +100,12 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             )
+          
           ],
         ),
-      );
+        ),
+  );
+      
 
   @override
   Widget build(BuildContext context) {
@@ -116,13 +162,7 @@ class _HomePageState extends State<HomePage> {
                         //color: Colors.white
                       ),
                       
-                          child: GestureDetector(
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Videos()),
-                              );
-                            },
+                          
                             child: GridView.builder(
                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                              crossAxisCount: 2),
@@ -132,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                              return cardsWidget(index);
                              }
                             ),
-                           ),
+                           
                         
                       );
                       },
